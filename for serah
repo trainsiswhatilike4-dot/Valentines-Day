@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine?</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .page {
+      display: none;
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    h1 {
+      color: #e63946;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .yes {
+      background: #e63946;
+      color: white;
+    }
+
+    .no {
+      background: #adb5bd;
+      color: white;
+      position: absolute;
+    }
+
+    .gift {
+      background: #e63946;
+      color: white;
+      display: block;
+      width: 100%;
+      margin: 15px 0;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-top: 10px;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page 1 -->
+  <div class="page active" id="page1">
+    <h1>Will you be my Valentine? ❤️</h1>
+    <button class="yes" onclick="goToPage('page2')">Yes</button>
+    <button class="no" id="noBtn">No</button>
+  </div>
+
+  <!-- Page 2 -->
+  <div class="page" id="page2">
+    <h1>Pick a present 🎁</h1>
+    <button class="gift" onclick="goToPage('song')">🎵 A Song</button>
+    <button class="gift" onclick="goToPage('photos')">📸 Our Photos</button>
+    <button class="gift" onclick="goToPage('letter')">💌 A Letter</button>
+  </div>
+
+  <!-- Song Page -->
+  <div class="page" id="song">
+    <h1>This song is for you ❤️</h1>
+    <audio controls>
+      <source src="song.mp3" type="audio/mpeg">
+      Your browser does not support audio.
+    </audio>
+    <br /><br />
+    <button onclick="goToPage('page2')">⬅ Back</button>
+  </div>
+
+  <!-- Photos Page -->
+  <div class="page" id="photos">
+    <h1>Our Memories 📸</h1>
+    <img src="photo1.jpg" alt="Us">
+    <img src="photo2.jpg" alt="Us">
+    <br />
+    <button onclick="goToPage('page2')">⬅ Back</button>
+  </div>
+
+  <!-- Letter Page -->
+  <div class="page" id="letter">
+    <h1>For You 💖</h1>
+    <p>
+      Write your paragraph here. This can be as long and heartfelt as you want.
+    </p>
+    <button onclick="goToPage('page2')">⬅ Back</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    let scale = 1;
+
+    noBtn.addEventListener('mouseover', () => {
+      scale -= 0.1;
+      noBtn.style.transform = `scale(${scale})`;
+
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    });
+
+    function goToPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
